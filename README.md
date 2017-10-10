@@ -1,6 +1,8 @@
 # Algorithms
 Practice problems of algorithms
-## Question 1: longestSubstring.cpp: Find the longest Substring in a given string Without Repeating Characters
+### Question 1: Find the longest Substring in a given string without repeating characters
+File: longestSubstring.cpp: <br>
+
 ```
 Given: abcabcd
 MaxLength: 4 (abcd)
