@@ -1,85 +1,30 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
 class Solution {
-    char sum;
-    char carry;
 public:
-    
-    void getSum(char a,char b, char carryIn){
-        switch(carryIn){
-            case '0':
-                if(a=='0'&& b=='0'){
-                    this->sum='0';
-                    this->carry='0';
-                }
-                else if(a=='0'&& b=='1'){
-                    this->sum='1';
-                    this->carry='0';
-                }
-                   else if(a=='1'&& b=='0'){
-                    this->sum='1';
-                    this->carry='0';
-                }
-                else{
-                    this->sum='0';
-                    this->carry='1';
-                }
-                break;
-            case '1':
-                if(a=='0'&& b=='0'){
-                    this->sum='1';
-                    this->carry='0';
-                }
-                else if(a=='0'&& b=='1'){
-                    this->sum='0';
-                    this->carry='1';
-                }
-                   else if(a=='1'&& b=='0'){
-                    this->sum='0';
-                    this->carry='1';
-                }
-                else{
-                    this->sum='1';
-                    this->carry='1';
-                }
-                break;
-        }
-    }
-    
-    
-    
-    
     string addBinary(string a, string b) {
-        string ans;
-        this->carry='0';
-        int sizea=a.size()-1;
-        int sizeb=b.size()-1;
-        char carryIn='0';
-        
-        while(sizea>-1 || sizeb>-1){
-            if(sizea>=0 && sizeb>=0){
-            getSum(a.at(sizea),b.at(sizeb),carryIn);
-            carryIn=this->carry;
-            sizea--;
-            sizeb--;
-            ans=this->sum+ans;   
-                cout<<"\n sum:"<<this->sum <<" \t carry"<<this->carry;
-            }
-            else if(sizea>=0 && sizeb<0){
-            getSum(a.at(sizea),'0',carryIn);
-            carryIn=this->carry;
-            sizea--;
-                ans=this->sum+ans; 
-                cout<<"\n sum:"<<this->sum <<" \t carry"<<this->carry;
-            }
-            else{
-            getSum('0',b.at(sizeb),carryIn);
-            carryIn=this->carry;;
-            sizeb--; 
-            ans=this->sum+ans; 
-                cout<<"\n sum:"<<this->sum <<" \t carry"<<this->carry;
-            }
+        int carryOut=0;
+        int sum=0;
+        string result="";
+        int i=a.size()-1,j=b.size()-1;
+
+        while(i>=0||j>=0||carryOut==1){
+            sum+=carryOut;
+            sum+=(i>=0?a[i]-'0':0);
+            sum+=(j>=0?b[j]-'0':0);
+            carryOut=sum/2;
+            sum=sum%2;
+            result=to_string(sum)+result;
+            sum=0;
+            --i;--j;
         }
-        if(this->carry=='1')
-        return this->carry+ans;
-        else return ans;
+        return result;
     }
 };
+
+int main(){
+Solution s;
+cout<<s.addBinary("1100","1011");
+}
